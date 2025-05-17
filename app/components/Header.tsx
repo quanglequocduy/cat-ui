@@ -62,7 +62,7 @@ export default function Header() {
             Hoạt Động Giới Trẻ
           </Link>
           <Link to="/dao-tao" className="hover:text-cat-orange">
-            Chuong Trình Đào Tạo
+            Chương Trình Đào Tạo
           </Link>
           <a
             href="#join"
