@@ -1,13 +1,8 @@
 import { useState } from "react";
-
-interface ImageItem {
-  id: number;
-  url: string;
-  caption: string;
-}
+import { Post } from "~/types";
 
 interface EventSliderProps {
-  images: ImageItem[];
+  images: Post[];
 }
 
 export default function EventSlider({ images }: EventSliderProps) {
@@ -30,23 +25,28 @@ export default function EventSlider({ images }: EventSliderProps) {
   };
 
   return (
-    <section className="p-6">
-      <div className="relative" style={{ zIndex: 50 }}>
+    <section className="p-4 md:p-6">
+      <div className="relative max-w-full mx-auto" style={{ zIndex: 50 }}>
+        {/* Image */}
         <img
           key={currentIndex}
-          src={images[currentIndex].url}
-          alt={images[currentIndex].caption}
-          className="w-full h-64 object-cover rounded-lg"
+          src={images[currentIndex].image_url}
+          alt={images[currentIndex].title}
+          className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-lg"
           style={{ zIndex: 0 }}
         />
+
+        {/* Title Overlay */}
         <div
-          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded"
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded text-sm sm:text-base md:text-lg"
           style={{ zIndex: 10 }}
         >
-          {images[currentIndex].caption}
+          {images[currentIndex].title}
         </div>
+
+        {/* Previous Button */}
         <button
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded hover:bg-opacity-80 transition pointer-events-auto cursor-pointer"
+          className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 sm:p-3 rounded-full hover:bg-opacity-80 transition pointer-events-auto cursor-pointer"
           style={{ zIndex: 40 }}
           onClick={handlePrevious}
           aria-label="Previous image"
@@ -54,8 +54,10 @@ export default function EventSlider({ images }: EventSliderProps) {
         >
           &lt;
         </button>
+
+        {/* Next Button */}
         <button
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded hover:bg-opacity-80 transition pointer-events-auto cursor-pointer"
+          className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 sm:p-3 rounded-full hover:bg-opacity-80 transition pointer-events-auto cursor-pointer"
           style={{ zIndex: 40 }}
           onClick={handleNext}
           aria-label="Next image"

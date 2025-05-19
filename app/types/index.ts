@@ -1,2 +1,2 @@
-export * from "./images";
-export * from "./posts";
+export * from "./category";
+export * from "./post";

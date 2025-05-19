@@ -1,7 +1,7 @@
-import { PostsItem } from "~/types/posts";
+import { Post } from "~/types";
 
 interface TrainingSectionProps {
-  trainings: PostsItem[];
+  trainings: Post[];
 }
 
 export default function TrainingSection({ trainings }: TrainingSectionProps) {
@@ -17,13 +17,13 @@ export default function TrainingSection({ trainings }: TrainingSectionProps) {
             className="border rounded-lg overflow-hidden shadow-md"
           >
             <img
-              src={item.imageUrl}
+              src={item.image_url}
               alt={item.title}
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
               <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="text-gray-600 text-sm">{item.description}</p>
+              <p className="text-gray-600 text-sm">{item.content}</p>
             </div>
           </div>
         ))}

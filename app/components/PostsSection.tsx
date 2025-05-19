@@ -1,28 +1,36 @@
-import { PostsItem } from "~/types/posts";
+import { Post } from "~/types";
 
 interface PostsSectionProps {
-  posts: PostsItem[];
+  posts: Post[];
 }
 
 export default function PostsSection({ posts }: PostsSectionProps) {
   return (
     <section className="p-6">
       <h2 className="text-2xl font-bold text-cat-blue mb-4">Hoạt Động</h2>
-      <div className="grid grid-cols-1 gap-4">
+      <div className="space-y-4">
         {posts.map((item) => (
           <div
             key={item.id}
-            className="border rounded-lg overflow-hidden shadow-md"
+            className="flex flex-col md:flex-row border rounded-lg overflow-hidden shadow-md"
           >
-            <img
-              src={item.imageUrl}
-              alt={item.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="text-gray-600 text-sm">{item.description}</p>
-              <p className="text-gray-400 text-xs mt-2">{item.date}</p>
+            {/* Hình ảnh bên trái */}
+            <div className="w-full md:w-3/12 h-48 md:h-auto">
+              <img
+                src={item.image_url}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Nội dung bên phải */}
+            <div className="w-full md:w-9/12 p-4 flex flex-col justify-between">
+              <div>
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="text-gray-600 text-sm line-clamp-3 mt-2">
+                  {item.content}
+                </p>
+              </div>
             </div>
           </div>
         ))}

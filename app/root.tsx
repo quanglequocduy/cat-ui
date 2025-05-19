@@ -1,6 +1,8 @@
 import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
+import { useState, useEffect } from "react";
+import { Post, Category } from "./types";
 
 export function links() {
   return [

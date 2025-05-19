@@ -36,69 +36,66 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Liên Kết */}
+        {/* Navigation Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Liên Kết</h3>
-          <ul className="space-y-1">
+          <h3 className="text-lg font-bold mb-2">Liên Kết</h3>
+          <ul className="space-y-2">
             <li>
-              <a href="/trang-chu" className="hover:text-cat-orange">
+              <a href="/" className="hover:text-cat-orange">
                 Trang Chủ
               </a>
             </li>
             <li>
-              <a href="/gioi-thieu" className="hover:text-cat-orange">
-                Giới Thiệu Thánh Carlo Acutis
+              <a href="/about" className="hover:text-cat-orange">
+                Giới Thiệu
               </a>
             </li>
             <li>
-              <a href="/hoat-dong" className="hover:text-cat-orange">
-                Hoạt Động Giới Trẻ
+              <a href="/services" className="hover:text-cat-orange">
+                Dịch Vụ
               </a>
             </li>
             <li>
-              <a href="/dao-tao" className="hover:text-cat-orange">
-                Chương Trình Đào Tạo
+              <a href="/contact" className="hover:text-cat-orange">
+                Liên Hệ
               </a>
             </li>
           </ul>
         </div>
 
-        {/* Thông Tin Liên Hệ */}
+        {/* Contact Information */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Thông Tin Liên Hệ</h3>
-          <ul className="space-y-1">
-            <li className="flex items-center">
-              <span className="mr-2">📞</span>
-              <span>(+84) 0987 123 456</span>
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2">📧</span>
-              <span>team@carloacutisteam.com</span>
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2">📍</span>
-              <span>123 Đường ABC, Phường 8, Quận 3, Tp. Hồ Chí Minh</span>
-            </li>
-          </ul>
+          <h3 className="text-lg font-bold mb-2">Liên Hệ</h3>
+          <p className="text-sm">Email: contact@carloacutisteam.com</p>
+          <p className="text-sm mt-1">Điện thoại: +84 123 456 789</p>
+          <p className="text-sm mt-1">Địa chỉ: 123 Đường ABC, TP.HCM</p>
         </div>
 
-        {/* Đăng Ký Nhận Tin */}
+        {/* Newsletter Subscription */}
         <div>
-          <h3 className="text-lg font-semibold mb-2">Đăng Ký Nhận Tin</h3>
+          <h3 className="text-lg font-bold mb-2">Đăng Ký Nhận Tin</h3>
           <p className="text-sm mb-2">
-            Chứng tỏ sự đắc việt mọi là lời Chúa qua email của bạn.
+            Nhận thông tin mới nhất từ Carlo Acutis Team.
           </p>
-          <div className="flex flex-col space-y-2">
+          <form className="flex flex-col space-y-2">
             <input
               type="email"
-              placeholder="Nhập email nhận tin"
+              placeholder="Nhập email của bạn"
               className="p-2 rounded text-black"
             />
-            <button className="bg-cat-orange text-white px-4 py-2 rounded hover:bg-orange-600">
+            <button
+              type="submit"
+              className="bg-cat-orange text-white py-2 px-4 rounded hover:bg-orange-600"
+            >
               Đăng Ký
             </button>
-          </div>
+          </form>
         </div>
+      </div>
+
+      {/* Footer Bottom */}
+      <div className="mt-6 border-t border-white pt-4 text-center text-sm">
+        © 2025 Carlo Acutis Team. All rights reserved.
       </div>
     </footer>
   );

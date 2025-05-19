@@ -7,10 +7,13 @@ export default function Header() {
   return (
     <header className="bg-cat-blue text-white p-4">
       <div className="flex justify-between items-center">
+        {/* Logo Section */}
         <div className="flex items-center">
           <img src="/logo-dark.png" alt="CAT Logo" className="h-12 mr-2" />
           <span className="text-sm">Carlo Acutis Team</span>
         </div>
+
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
@@ -29,47 +32,55 @@ export default function Header() {
             />
           </svg>
         </button>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-4">
           <Link to="/" className="hover:text-cat-orange">
             Trang Chủ
           </Link>
-          <Link to="/gioi-thieu" className="hover:text-cat-orange">
-            Giới Thiệu Thánh Carlo Acutis
+          <Link to="/about" className="hover:text-cat-orange">
+            Giới Thiệu
           </Link>
-          <Link to="/hoat-dong" className="hover:text-cat-orange">
-            Hoạt Động Giới Trẻ
+          <Link to="/services" className="hover:text-cat-orange">
+            Dịch Vụ
           </Link>
-          <Link to="/dao-tao" className="hover:text-cat-orange">
-            Chuong Trình Đào Tạo
+          <Link to="/contact" className="hover:text-cat-orange">
+            Liên Hệ
           </Link>
         </nav>
-        <a
-          href="#join"
-          className="hidden md:block bg-cat-orange text-white px-4 py-2 rounded hover:bg-orange-600"
-        >
-          Tham Gia Nhóm CAT
-        </a>
       </div>
+
+      {/* Mobile Navigation */}
       {isOpen && (
-        <nav className="md:hidden mt-4 flex flex-col space-y-2">
-          <Link to="/" className="hover:text-cat-orange">
+        <nav className="md:hidden mt-4 space-y-2">
+          <Link
+            to="/"
+            className="block hover:text-cat-orange border-b border-white pb-2"
+            onClick={() => setIsOpen(false)}
+          >
             Trang Chủ
           </Link>
-          <Link to="/gioi-thieu" className="hover:text-cat-orange">
-            Giới Thiệu Thánh Carlo Acutis
-          </Link>
-          <Link to="/hoat-dong" className="hover:text-cat-orange">
-            Hoạt Động Giới Trẻ
-          </Link>
-          <Link to="/dao-tao" className="hover:text-cat-orange">
-            Chương Trình Đào Tạo
-          </Link>
-          <a
-            href="#join"
-            className="bg-cat-orange text-white px-4 py-2 rounded hover:bg-orange-600"
+          <Link
+            to="/about"
+            className="block hover:text-cat-orange border-b border-white pb-2"
+            onClick={() => setIsOpen(false)}
           >
-            Tham Gia Nhóm CAT
-          </a>
+            Giới Thiệu
+          </Link>
+          <Link
+            to="/services"
+            className="block hover:text-cat-orange border-b border-white pb-2"
+            onClick={() => setIsOpen(false)}
+          >
+            Dịch Vụ
+          </Link>
+          <Link
+            to="/contact"
+            className="block hover:text-cat-orange pb-2"
+            onClick={() => setIsOpen(false)}
+          >
+            Liên Hệ
+          </Link>
         </nav>
       )}
     </header>
