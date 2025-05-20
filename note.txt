@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Feed UI</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React và ReactDOM CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <!-- Remix Router (React Router) CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@remix-run/router@1.7.0/dist/router.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-router-dom@6.14.0/dist/umd/react-router-dom.production.min.js"></script>
+  <!-- Babel để hỗ trợ JSX -->
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.5/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // Mock data cho danh sách bài viết
+    const newsData = [
+      {
+        title: "Bài giảng Đức Thánh Cha - Chủ nhật 27 Thường Niên năm B",
+        description: "Đức Thánh Cha giảng về hướng đi đức c... Đức Thánh Cha trong thánh lễ và...",
+        image: "https://via.placeholder.com/80x80?text=Image1"
+      },
+      {
+        title: "Biển niên sử của Giáo hội Công giáo Việt Nam trong 100 năm Nguyền",
+        description: "Theo đó sự, vào tháng 3 năm Nguyền Hoa thưa (1533), một người Âu Châu...",
+        image: "https://via.placeholder.com/80x80?text=Image2"
+      },
+      {
+        title: "Những lời sử của quan trọng của GHCGVN",
+        description: "Sức sống của Giáo hội Việt Nam hôm nay là thành quả của 500 năm gieo...",
+        image: "https://via.placeholder.com/80x80?text=Image3"
+      },
+      {
+        title: "Giáo lý chuẩn niên B Chủ nhật 27 Thường niên B",
+        description: "Đề tài trở lại các nhà giảng thuyết thiên thiên trong việc lý bảo vệ...",
+        image: "https://via.placeholder.com/80x80?text=Image4"
+      }
+    ];
+
+    // Mock data cho hình ảnh carousel
+    const carouselImages = [
+      "https://via.placeholder.com/800x400?text=Church+Candle+Scene+1",
+      "https://via.placeholder.com/800x400?text=Church+Candle+Scene+2",
+      "https://via.placeholder.com/800x400?text=Church+Candle+Scene+3"
+    ];
+
+    // Component cho một bài viết
+    function NewsItem({ title, description, image }) {
+      return (
+        <div className="flex items-start space-x-4 p-4 hover:bg-gray-50 transition">
+          <img src={image} alt={title} className="w-20 h-20 object-cover rounded-md" />
+          <div className="flex-1">
+            <h3 className="text-base font-semibold text-blue-800 hover:underline">{title}</h3>
+            <p className="text-gray-700 text-sm line-clamp-2">{description}</p>
+          </div>
+        </div>
+      );
+    }
+
+    // Component cho danh sách bài viết
+    function NewsFeed() {
+      return (
+        <div className="bg-white rounded-lg shadow-md h-[400px] overflow-y-auto">
+          {newsData.map((news, index) => (
+            <NewsItem
+              key={index}
+              title={news.title}
+              description={news.description}
+              image={news.image}
+            />
+          ))}
+        </div>
+      );
+    }
+
+    // Component cho carousel
+    function ImageCarousel() {
+      const [currentIndex, setCurrentIndex] = React.useState(0);
+
+      const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
+      };
+
+      const prevSlide = () => {
+        setCurrentIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+      };
+
+      return (
+        <div className="relative w-full h-full">
+          <img
+            src={carouselImages[currentIndex]}
+            alt={`Slide ${currentIndex + 1}`}
+            className="w-full h-full object-cover rounded-lg"
+          />
+          <button
+            onClick={prevSlide}
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-900 bg-opacity-70 text-white p-3 rounded-full hover:bg-opacity-90"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-900 bg-opacity-70 text-white p-3 rounded-full hover:bg-opacity-90"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      );
+    }
+
+    // Component chính
+    function App() {
+      return (
+        <div className="min-h-screen bg-gray-100">
+          {/* Header */}
+          <header className="bg-blue-800 text-white p-3">
+            <div className="container mx-auto flex justify-between items-center">
+              <h1 className="text-lg font-bold">HOẠT ĐỘNG</h1>
+              <a href="#" className="text-sm hover:underline">Xem tất cả →</a>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <main className="container mx-auto p-4">
+            <div className="flex flex-col lg:flex-row gap-6">
+              {/* News Feed (chiếm 3/10) */}
+              <div className="lg:w-3/10">
+                <NewsFeed />
+              </div>
+
+              {/* Carousel (chiếm 7/10) */}
+              <div className="lg:w-7/10 h-[400px]">
+                <ImageCarousel />
+              </div>
+            </div>
+          </main>
+        </div>
+      );
+    }
+
+    // Render ứng dụng
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

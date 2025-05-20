@@ -49,20 +49,34 @@ export default function Index() {
     return map;
   }, {} as Record<string, number>);
 
-  const newsPosts = posts.filter((post) => post.category_id === categoryMap["news"]);
-  const trainingPosts = posts.filter((post) => post.category_id === categoryMap["training"]);
-  const eventPosts = posts.filter((post) => post.category_id === categoryMap["event"]);
-  const heroPosts = posts.filter((post) => post.category_id === categoryMap["hero"]);
+  const newsPosts = posts.filter(
+    (post) => post.category_id === categoryMap["news"]
+  );
+  const trainingPosts = posts.filter(
+    (post) => post.category_id === categoryMap["training"]
+  );
+  const eventPosts = posts.filter(
+    (post) => post.category_id === categoryMap["event"]
+  );
+  const heroPosts = posts.filter(
+    (post) => post.category_id === categoryMap["hero"]
+  );
 
   const heroPost = heroPosts.length > 0 ? heroPosts[0] : null;
 
   return (
     <div className="mx-4 md:mx-48 pointer-events-auto" style={{ zIndex: 10 }}>
       <div className="flex flex-col md:flex-row gap-6">
-        <div className="w-full md:w-1/3 pointer-events-auto" style={{ zIndex: 10 }}>
+        <div
+          className="w-full md:w-1/3 pointer-events-auto"
+          style={{ zIndex: 10 }}
+        >
           <PostsSection posts={newsPosts} />
         </div>
-        <div className="w-full md:w-2/3 pointer-events-auto" style={{ zIndex: 20 }}>
+        <div
+          className="w-full md:w-2/3 pointer-events-auto"
+          style={{ zIndex: 20 }}
+        >
           <EventSlider images={eventPosts} />
         </div>
       </div>
