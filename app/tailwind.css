@@ -6,3 +6,7 @@ html,
 body {
   @apply bg-white font-sans;
 }
+
+html {
+  scroll-behavior: smooth;
+}

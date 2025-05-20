@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { Link } from "@remix-run/react";
+import { Link as ScrollLink } from "react-scroll";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-cat-blue text-white p-4">
-      <div className="flex justify-between items-center">
-        {/* Logo Section */}
-        <div className="flex items-center">
-          <img src="/logo-dark.png" alt="CAT Logo" className="h-12 mr-2" />
-          <span className="text-sm">Carlo Acutis Team</span>
-        </div>
+    <header className="bg-[#00376C] text-white px-4 py-3">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/logo-dark.png" alt="CAT Logo" className="h-12" />
+          <div className="leading-tight hidden sm:block">
+            <div className="text-xl font-bold">CAT</div>
+            <div className="text-xs tracking-wide">CARLO ACUTIS TEAM</div>
+          </div>
+        </Link>
 
-        {/* Mobile Menu Button */}
+        {/* Hamburger Button */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle Menu"
         >
           <svg
             className="w-6 h-6"
@@ -28,59 +33,71 @@ export default function Header() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
+              d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
             />
           </svg>
         </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-4">
-          <Link to="/" className="hover:text-cat-orange">
+        <nav className="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-wide">
+          <Link
+            to="/"
+            className="border border-white px-4 py-2 hover:bg-white hover:text-[#00376C] transition"
+          >
             Trang Chủ
           </Link>
-          <Link to="/about" className="hover:text-cat-orange">
-            Giới Thiệu
+          <ScrollLink
+            to="hero"
+            className="hover:text-cat-orange transition duration-200"
+          >
+            Giới Thiệu Thánh Carlo Acutis
+          </ScrollLink>
+          <Link
+            to="/activities"
+            className="hover:text-cat-orange transition duration-200"
+          >
+            Hoạt Động Giới Trẻ
           </Link>
-          <Link to="/services" className="hover:text-cat-orange">
-            Dịch Vụ
-          </Link>
-          <Link to="/contact" className="hover:text-cat-orange">
-            Liên Hệ
-          </Link>
+          <ScrollLink
+            to="training"
+            className="hover:text-cat-orange transition duration-200"
+          >
+            Chương Trình Đào Tạo
+          </ScrollLink>
         </nav>
       </div>
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <nav className="md:hidden mt-4 space-y-2">
+        <nav className="md:hidden mt-4 flex flex-col space-y-2 text-sm font-bold uppercase tracking-wide">
           <Link
             to="/"
-            className="block hover:text-cat-orange border-b border-white pb-2"
             onClick={() => setIsOpen(false)}
+            className="border border-white px-4 py-2 hover:bg-white hover:text-[#00376C] transition"
           >
             Trang Chủ
           </Link>
-          <Link
-            to="/about"
-            className="block hover:text-cat-orange border-b border-white pb-2"
+          <ScrollLink
+            to="hero"
             onClick={() => setIsOpen(false)}
+            className="hover:text-cat-orange transition duration-200"
           >
-            Giới Thiệu
-          </Link>
+            Giới Thiệu Thánh Carlo Acutis
+          </ScrollLink>
           <Link
-            to="/services"
-            className="block hover:text-cat-orange border-b border-white pb-2"
+            to="/activities"
             onClick={() => setIsOpen(false)}
+            className="hover:text-cat-orange transition duration-200"
           >
-            Dịch Vụ
+            Hoạt Động Giới Trẻ
           </Link>
-          <Link
-            to="/contact"
-            className="block hover:text-cat-orange pb-2"
+          <ScrollLink
+            to="training"
             onClick={() => setIsOpen(false)}
+            className="hover:text-cat-orange transition duration-200"
           >
-            Liên Hệ
-          </Link>
+            Chương Trình Đào Tạo
+          </ScrollLink>
         </nav>
       )}
     </header>
