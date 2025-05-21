@@ -6,7 +6,7 @@ interface TrainingSectionProps {
 
 export default function TrainingSection({ trainings }: TrainingSectionProps) {
   return (
-    <section id="training" className="p-6 md:p-8 rounded-lg shadow-sm">
+    <section id="training" className="p-6 md:p-8 mb-4">
       {/* Phần "Chương trình đào tạo" */}
       <div className="mb-4">
         <h2 className="text-2xl font-bold text-cat-blue">Chương trình đào tạo</h2>

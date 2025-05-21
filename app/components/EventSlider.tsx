@@ -25,7 +25,7 @@ export default function EventSlider({ images }: EventSliderProps) {
   };
 
   return (
-    <section className="p-4 md:p-6">
+    <section>
       <div className="relative max-w-full mx-auto" style={{ zIndex: 50 }}>
         {/* Image */}
         <img

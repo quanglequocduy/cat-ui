@@ -66,21 +66,27 @@ export default function Index() {
 
   return (
     <div className="mx-4 md:mx-48 pointer-events-auto" style={{ zIndex: 10 }}>
-      <div className="flex flex-col md:flex-row gap-6">
-        <div
-          className="w-full md:w-1/3 pointer-events-auto"
-          style={{ zIndex: 10 }}
-        >
-          <PostsSection posts={newsPosts} />
+      <section className="mt-4">
+        <div className="pl-6">
+          <h2 className="text-2xl font-bold text-cat-blue">Hoạt động</h2>
+          <hr className="mt-2 border-t-2 border-cat-blue w-16" />
         </div>
-        <div
-          className="w-full md:w-2/3 pointer-events-auto"
-          style={{ zIndex: 20 }}
-        >
-          <EventSlider images={eventPosts} />
+        <div className="flex flex-col md:flex-row gap-6 items-stretch p-6">
+          <div
+            className="w-full md:w-1/3 pointer-events-auto"
+            style={{ zIndex: 10 }}
+          >
+            <PostsSection posts={newsPosts} />
+          </div>
+          <div
+            className="w-full md:w-2/3 pointer-events-auto"
+            style={{ zIndex: 20 }}
+          >
+            <EventSlider images={eventPosts} />
+          </div>
         </div>
-      </div>
-
+      </section>
+      
       {heroPost && <Hero post={heroPost} />}
 
       <TrainingSection trainings={trainingPosts} />

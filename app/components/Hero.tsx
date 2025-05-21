@@ -8,7 +8,7 @@ export default function Hero({ post }: HeroProps) {
   if (!post) return null;
   
   return (
-    <section id="hero" className="p-6 md:p-8 rounded-lg shadow-sm">
+    <section id="hero" className="p-6 md:p-8 mb-4">
       {/* Phần "Giới thiệu" */}
       <div className="mb-4">
         <h2 className="text-2xl font-bold text-cat-blue">Giới thiệu</h2>

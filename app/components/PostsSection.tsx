@@ -6,8 +6,7 @@ interface PostsSectionProps {
 
 export default function PostsSection({ posts }: PostsSectionProps) {
   return (
-    <section id="activities" className="p-6">
-      <h2 className="text-2xl font-bold text-cat-blue mb-4">Hoạt Động</h2>
+    <section id="activities">
       <div className="flex flex-col gap-3">
         {posts.map((item) => (
           <div
