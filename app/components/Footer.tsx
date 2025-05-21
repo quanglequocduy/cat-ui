@@ -8,6 +8,13 @@ export default function Footer() {
         {/* Social Media Links */}
         <div>
           <h3 className="text-lg font-bold mb-2">Theo Dõi Chúng Tôi</h3>
+          <div className="mb-4">
+            <img
+              src="/CAT-Logo.jpg"
+              alt="Logo"
+              className="h-12 w-auto"
+            />
+          </div>
           <div className="flex space-x-4">
             <a
               href="https://facebook.com"
