@@ -10,7 +10,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img src="/logo-dark.png" alt="CAT Logo" className="h-12" />
+          <img src="/CAT-Logo.jpg" alt="CAT Logo" className="h-12" />
           <div className="leading-tight hidden sm:block">
             <div className="text-xl font-bold">CAT</div>
             <div className="text-xs tracking-wide">CARLO ACUTIS TEAM</div>
