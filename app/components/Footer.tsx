@@ -1,37 +1,29 @@
+import { FaFacebookF, FaYoutube } from "react-icons/fa";
+import { Link as ScrollLink } from "react-scroll";
+
 export default function Footer() {
   return (
-    <footer className="bg-cat-blue text-white p-6">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Logo and Slogan */}
+    <footer className="bg-[#00376C] text-white p-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {/* Social Media Links */}
         <div>
-          <img src="/logo-cat.png" alt="CAT Logo" className="h-16 mb-2" />
-          <p className="text-sm">Carlo Acutis Team</p>
-          <p className="text-sm mt-1">Theo dõi Carlo Acutis Team</p>
-          <div className="flex space-x-4 mt-2">
+          <h3 className="text-lg font-bold mb-2">Theo Dõi Chúng Tôi</h3>
+          <div className="flex space-x-4">
             <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="hover:text-cat-orange transition"
             >
-              <img
-                src="/facebook-icon.png"
-                alt="Facebook"
-                className="h-6 w-6"
-              />
+              <FaFacebookF className="h-6 w-6" />
             </a>
             <a
               href="https://youtube.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="hover:text-cat-orange transition"
             >
-              <img src="/youtube-icon.png" alt="YouTube" className="h-6 w-6" />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src="/twitter-icon.png" alt="Twitter" className="h-6 w-6" />
+              <FaYoutube className="h-6 w-6" />
             </a>
           </div>
         </div>
@@ -41,24 +33,44 @@ export default function Footer() {
           <h3 className="text-lg font-bold mb-2">Liên Kết</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/" className="hover:text-cat-orange">
+              <ScrollLink
+                to="hero"
+                smooth={true}
+                duration={500}
+                className="hover:text-cat-orange cursor-pointer"
+              >
                 Trang Chủ
-              </a>
+              </ScrollLink>
             </li>
             <li>
-              <a href="/about" className="hover:text-cat-orange">
+              <ScrollLink
+                to="about"
+                smooth={true}
+                duration={500}
+                className="hover:text-cat-orange cursor-pointer"
+              >
                 Giới Thiệu
-              </a>
+              </ScrollLink>
             </li>
             <li>
-              <a href="/services" className="hover:text-cat-orange">
+              <ScrollLink
+                to="services"
+                smooth={true}
+                duration={500}
+                className="hover:text-cat-orange cursor-pointer"
+              >
                 Dịch Vụ
-              </a>
+              </ScrollLink>
             </li>
             <li>
-              <a href="/contact" className="hover:text-cat-orange">
+              <ScrollLink
+                to="contact"
+                smooth={true}
+                duration={500}
+                className="hover:text-cat-orange cursor-pointer"
+              >
                 Liên Hệ
-              </a>
+              </ScrollLink>
             </li>
           </ul>
         </div>
@@ -68,7 +80,6 @@ export default function Footer() {
           <h3 className="text-lg font-bold mb-2">Liên Hệ</h3>
           <p className="text-sm">Email: contact@carloacutisteam.com</p>
           <p className="text-sm mt-1">Điện thoại: +84 123 456 789</p>
-          <p className="text-sm mt-1">Địa chỉ: 123 Đường ABC, TP.HCM</p>
         </div>
 
         {/* Newsletter Subscription */}
@@ -85,7 +96,7 @@ export default function Footer() {
             />
             <button
               type="submit"
-              className="bg-cat-orange text-white py-2 px-4 rounded hover:bg-orange-600"
+              className="bg-cat-orange text-white py-2 px-4 rounded hover:bg-orange-600 transition"
             >
               Đăng Ký
             </button>
