@@ -1,7 +1,7 @@
 import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
-import tailwindStyles from "~/tailwind.css";
+import tailwindStyles from "~/tailwind.css?url";
 
 export function links() {
   return [
