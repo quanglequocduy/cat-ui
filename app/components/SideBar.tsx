@@ -17,8 +17,15 @@ export default function Sidebar() {
     <>
       {/* Sidebar desktop */}
       <aside className="hidden md:flex w-64 bg-gray-800 text-white flex-col h-screen fixed left-0 top-0">
-        <div className="p-6 font-bold text-lg tracking-wide border-b border-gray-700">
-          Admin CAT
+        <div className="p-6 border-b border-gray-700 flex flex-row items-center gap-3">
+          <img
+            src="/CAT-Logo.jpg"
+            alt="CAT Logo"
+            className="h-12 w-12 rounded-full shadow"
+          />
+          <span className="font-bold text-xl tracking-wide text-cat-orange">
+            Admin CAT
+          </span>
         </div>
         <nav className="flex-1 px-4 overflow-y-auto">
           <ul className="space-y-2 py-4">
