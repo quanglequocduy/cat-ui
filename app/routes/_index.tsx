@@ -86,7 +86,7 @@ export default function Index() {
           </div>
         </div>
       </section>
-      
+
       {heroPost && <Hero post={heroPost} />}
 
       <TrainingSection trainings={trainingPosts} />
