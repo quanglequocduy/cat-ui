@@ -8,8 +8,11 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { tokenCookie } from "./admin.login";
+import { requireAdminAuth } from "~/lib/auth.server";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
+  await requireAdminAuth(request);
+
   const res = await fetch(
     `https://cat-api-kmk7.onrender.com/api/posts/${params.postId}`
   );

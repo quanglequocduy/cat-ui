@@ -4,8 +4,10 @@ import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Post } from "~/types";
 import Sidebar from "~/components/SideBar";
+import { requireAdminAuth } from "~/lib/auth.server";
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  await requireAdminAuth(request);
   const res = await fetch("https://cat-api-kmk7.onrender.com/api/posts");
   if (!res.ok) {
     throw new Response("Failed to fetch posts", { status: 500 });

@@ -6,8 +6,11 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { tokenCookie } from "./admin.login";
+import { requireAdminAuth } from "~/lib/auth.server";
 
 export const action: ActionFunction = async ({ request }) => {
+  await requireAdminAuth(request);
+
   // Lấy JWT token từ cookie/session (ví dụ, nếu bạn lưu ở cookie)
   const cookieHeader = request.headers.get("cookie");
   const token = (await tokenCookie.parse(cookieHeader)) || "";

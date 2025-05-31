@@ -1,5 +1,16 @@
-import { ActionFunction, redirect, json } from "@remix-run/node";
+import {
+  ActionFunction,
+  redirect,
+  json,
+  LoaderFunction,
+} from "@remix-run/node";
 import { tokenCookie } from "./admin.login";
+import { requireAdminAuth } from "~/lib/auth.server";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  await requireAdminAuth(request);
+  return null;
+};
 
 export const action: ActionFunction = async ({ request, params }) => {
   const cookieHeader = request.headers.get("cookie");

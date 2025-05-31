@@ -1,9 +1,9 @@
 import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Outlet } from "@remix-run/react";
 import Sidebar from "~/components/SideBar";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
+import { requireAdminAuth } from "~/lib/auth.server";
 
 interface LoaderData {
   postsCount: number;
@@ -11,7 +11,8 @@ interface LoaderData {
   usersCount: number;
 }
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  await requireAdminAuth(request);
   try {
     const [postsRes, categoriesRes, usersRes] = await Promise.all([
       fetch("https://cat-api-kmk7.onrender.com/api/posts"),
