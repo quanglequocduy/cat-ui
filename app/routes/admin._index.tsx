@@ -49,7 +49,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function AdminLayout() {
   const { postsCount, categoriesCount, usersCount } =
     useLoaderData<LoaderData>();
-  console.log("AdminLayout is rendering");
 
   return (
     <div className="flex min-h-screen">
