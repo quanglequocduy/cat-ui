@@ -1,5 +1,5 @@
 import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData, Link } from "@remix-run/react";
+import { useLoaderData, Link, Form } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Post } from "~/types";
@@ -107,13 +107,29 @@ export default function PostList() {
                                 Chỉnh sửa
                               </Button>
                             </Link>
-                            <Button
-                              size="sm"
-                              variant="destructive"
+                            <Form
+                              method="post"
+                              action={`/admin/posts/${post.id}/delete`}
                               className="w-full md:w-auto"
                             >
-                              Xoá
-                            </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                className="w-full md:w-auto"
+                                type="submit"
+                                onClick={(e) => {
+                                  if (
+                                    !window.confirm(
+                                      "Bạn có chắc chắn muốn xoá bài viết này?"
+                                    )
+                                  ) {
+                                    e.preventDefault();
+                                  }
+                                }}
+                              >
+                                Xoá
+                              </Button>
+                            </Form>
                           </div>
                         </td>
                       </tr>
