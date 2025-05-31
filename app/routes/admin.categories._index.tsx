@@ -27,10 +27,7 @@ export default function CategoryList() {
             <h1 className="text-3xl font-bold text-gray-800">Danh mục</h1>
             <p className="text-gray-600 mt-2">Quản lý danh mục bài viết.</p>
           </div>
-          <Button
-            asChild
-            className="bg-cat-orange hover:bg-orange-500 text-white"
-          >
+          <Button asChild className="hover:bg-cat-blue bg-blue-500 text-white">
             <Link to="/admin/categories/new">Thêm danh mục</Link>
           </Button>
         </div>
