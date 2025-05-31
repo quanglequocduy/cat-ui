@@ -1,23 +1,34 @@
-import { ActionFunction, redirect, json } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import {
+  ActionFunction,
+  LoaderFunction,
+  redirect,
+  json,
+} from "@remix-run/node";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import Sidebar from "~/components/SideBar";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { tokenCookie } from "./admin.login";
+import type { Category } from "~/types/category";
 import { requireAdminAuth } from "~/lib/auth.server";
+import { tokenCookie } from "./admin.login";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  await requireAdminAuth(request);
+  const res = await fetch("https://cat-api-kmk7.onrender.com/api/categories");
+  if (!res.ok)
+    throw new Response("Failed to fetch categories", { status: 500 });
+  const categories: Category[] = await res.json();
+  return json({ categories });
+};
 
 export const action: ActionFunction = async ({ request }) => {
   await requireAdminAuth(request);
-
-  // Lấy JWT token từ cookie/session (ví dụ, nếu bạn lưu ở cookie)
   const cookieHeader = request.headers.get("cookie");
   const token = (await tokenCookie.parse(cookieHeader)) || "";
-
   const formData = await request.formData();
 
-  // Tạo formData mới để gửi lên API backend (multipart/form-data)
   const apiForm = new FormData();
   apiForm.append("title", formData.get("title") as string);
   apiForm.append("content", formData.get("content") as string);
@@ -31,7 +42,6 @@ export const action: ActionFunction = async ({ request }) => {
       method: "POST",
       headers: {
         Authorization: token ? `Bearer ${token}` : "",
-        // KHÔNG set Content-Type, fetch sẽ tự set khi dùng FormData
       },
       body: apiForm,
     });
@@ -51,6 +61,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function NewPost() {
+  const { categories } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
 
   return (
@@ -77,10 +88,19 @@ export default function NewPost() {
                 <Input type="text" name="title" required />
               </div>
               <div>
-                <label className="block mb-1 font-medium">
-                  Danh mục (category_id)
-                </label>
-                <Input type="text" name="category_id" required />
+                <label className="block mb-1 font-medium">Danh mục</label>
+                <select
+                  name="category_id"
+                  required
+                  className="w-full border rounded px-3 py-2"
+                >
+                  <option value="">-- Chọn danh mục --</option>
+                  {categories.map((cat: Category) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label className="block mb-1 font-medium">Nội dung</label>

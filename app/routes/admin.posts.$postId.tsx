@@ -1,26 +1,43 @@
-import { ActionFunction, json, redirect } from "@remix-run/node";
-import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
-import { useLoaderData, Form } from "@remix-run/react";
-import { Post } from "~/types";
+import {
+  LoaderFunctionArgs,
+  ActionFunctionArgs,
+  json,
+  redirect,
+} from "@remix-run/node";
+import { useLoaderData, Form, useActionData } from "@remix-run/react";
 import Sidebar from "~/components/SideBar";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { tokenCookie } from "./admin.login";
+import type { Post } from "~/types/post";
+import type { Category } from "~/types/category";
 import { requireAdminAuth } from "~/lib/auth.server";
+import { tokenCookie } from "./admin.login";
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   await requireAdminAuth(request);
 
-  const res = await fetch(
+  // Fetch post
+  const postRes = await fetch(
     `https://cat-api-kmk7.onrender.com/api/posts/${params.postId}`
   );
-  const post: Post = await res.json();
-  return json(post);
+  if (!postRes.ok) throw new Response("Not found", { status: 404 });
+  const post: Post = await postRes.json();
+
+  // Fetch categories
+  const catRes = await fetch(
+    "https://cat-api-kmk7.onrender.com/api/categories"
+  );
+  if (!catRes.ok)
+    throw new Response("Failed to fetch categories", { status: 500 });
+  const categories: Category[] = await catRes.json();
+
+  return json({ post, categories });
 };
 
-export const action: ActionFunction = async ({ request, params }) => {
+export const action = async ({ request, params }: ActionFunctionArgs) => {
+  await requireAdminAuth(request);
   const cookieHeader = request.headers.get("cookie");
   const token = (await tokenCookie.parse(cookieHeader)) || "";
 
@@ -31,24 +48,45 @@ export const action: ActionFunction = async ({ request, params }) => {
   apiForm.append("title", formData.get("title") as string);
   apiForm.append("content", formData.get("content") as string);
   apiForm.append("category_id", formData.get("category_id") as string);
-  if (formData.get("image")) {
-    apiForm.append("image", formData.get("image") as File);
+  const image = formData.get("image");
+  if (
+    image &&
+    typeof image !== "string" &&
+    image instanceof File &&
+    image.size > 0
+  ) {
+    apiForm.append("image", image as File);
   }
+  // Nếu không chọn file mới, không append image => backend giữ hình cũ
 
-  await fetch(`https://cat-api-kmk7.onrender.com/api/posts/${params.postId}`, {
-    method: "PUT",
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-      // KHÔNG set Content-Type, fetch sẽ tự set khi dùng FormData
-    },
-    body: apiForm,
-  });
+  const res = await fetch(
+    `https://cat-api-kmk7.onrender.com/api/posts/${params.postId}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      body: apiForm,
+    }
+  );
+
+  if (!res.ok) {
+    const error = await res.json();
+    return json(
+      { error: error.error || "Cập nhật bài viết thất bại" },
+      { status: 400 }
+    );
+  }
 
   return redirect("/admin/posts");
 };
 
 export default function EditPost() {
-  const post = useLoaderData<Post>();
+  const { post, categories } = useLoaderData<{
+    post: Post;
+    categories: Category[];
+  }>();
+  const actionData = useActionData<typeof action>();
 
   return (
     <div className="flex min-h-screen">
@@ -64,6 +102,11 @@ export default function EditPost() {
               encType="multipart/form-data"
               className="space-y-6"
             >
+              {actionData?.error && (
+                <div className="text-red-600 font-medium mb-2">
+                  {actionData.error}
+                </div>
+              )}
               {post.image_url && (
                 <div className="flex justify-center mb-4">
                   <img
@@ -83,15 +126,20 @@ export default function EditPost() {
                 />
               </div>
               <div>
-                <label className="block mb-1 font-medium">
-                  Danh mục (category_id)
-                </label>
-                <Input
-                  type="text"
+                <label className="block mb-1 font-medium">Danh mục</label>
+                <select
                   name="category_id"
-                  defaultValue={post.category_id}
                   required
-                />
+                  className="w-full border rounded px-3 py-2"
+                  defaultValue={post.category_id}
+                >
+                  <option value="">-- Chọn danh mục --</option>
+                  {categories.map((cat: Category) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label className="block mb-1 font-medium">Nội dung</label>
@@ -107,6 +155,9 @@ export default function EditPost() {
                   Hình ảnh mới (nếu muốn thay)
                 </label>
                 <Input type="file" name="image" accept="image/*" />
+                <p className="text-xs text-gray-500 mt-1">
+                  Để trống nếu muốn giữ hình cũ.
+                </p>
               </div>
               <div className="flex gap-2 justify-end">
                 <Button
