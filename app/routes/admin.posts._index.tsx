@@ -24,6 +24,21 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json({ posts, categories });
 };
 
+function StatusTag({ status }: { status: string }) {
+  if (status === "published") {
+    return (
+      <span className="inline-block px-2 py-1 text-xs font-semibold rounded bg-green-100 text-green-700">
+        Công khai
+      </span>
+    );
+  }
+  return (
+    <span className="inline-block px-2 py-1 text-xs font-semibold rounded bg-orange-100 text-orange-700">
+      Nháp
+    </span>
+  );
+}
+
 export default function PostList() {
   const { posts, categories } = useLoaderData<typeof loader>();
   const categoryMap = Object.fromEntries(
@@ -115,8 +130,8 @@ export default function PostList() {
                         <td className="px-4 py-3 text-gray-900">
                           {categoryMap[post.category_id] || "Không rõ"}
                         </td>
-                        <td className="px-4 py-3 text-gray-900 capitalize">
-                          {post.status}
+                        <td className="px-4 py-3">
+                          <StatusTag status={post.status} />
                         </td>
                         <td className="px-4 py-3 text-gray-600 truncate max-w-[200px] md:max-w-[400px]">
                           {post.content}
