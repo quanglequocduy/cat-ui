@@ -2,7 +2,7 @@ import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, Link, Form } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Post } from "~/types";
+import { Category, Post } from "~/types";
 import Sidebar from "~/components/SideBar";
 import { requireAdminAuth } from "~/lib/auth.server";
 
@@ -13,11 +13,22 @@ export const loader: LoaderFunction = async ({ request }) => {
     throw new Response("Failed to fetch posts", { status: 500 });
   }
   const posts: Post[] = await res.json();
-  return json(posts);
+
+  const categoriesRes = await fetch(
+    "https://cat-api-kmk7.onrender.com/api/categories"
+  );
+  if (!categoriesRes.ok) {
+    throw new Response("Failed to fetch categories", { status: 500 });
+  }
+  const categories: Category[] = await categoriesRes.json();
+  return json({ posts, categories });
 };
 
 export default function PostList() {
-  const posts = useLoaderData<Post[]>();
+  const { posts, categories } = useLoaderData<typeof loader>();
+  const categoryMap = Object.fromEntries(
+    categories.map((cat: Category) => [cat.id, cat.name])
+  );
 
   return (
     <div className="flex h-screen">
@@ -55,6 +66,9 @@ export default function PostList() {
                       Hình ảnh
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">
+                      Danh mục
+                    </th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">
                       Nội dung
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">
@@ -73,7 +87,7 @@ export default function PostList() {
                       </td>
                     </tr>
                   ) : (
-                    posts.map((post) => (
+                    posts.map((post: Post) => (
                       <tr key={post.id} className="border-t hover:bg-gray-50">
                         <td className="px-4 py-3 text-gray-900 truncate max-w-[200px] md:max-w-[300px]">
                           {post.title}
@@ -94,6 +108,9 @@ export default function PostList() {
                               Không có hình ảnh
                             </span>
                           )}
+                        </td>
+                        <td className="px-4 py-3 text-gray-900">
+                          {categoryMap[post.category_id] || "Không rõ"}
                         </td>
                         <td className="px-4 py-3 text-gray-600 truncate max-w-[200px] md:max-w-[400px]">
                           {post.content}
