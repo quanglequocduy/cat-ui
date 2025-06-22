@@ -48,6 +48,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   apiForm.append("title", formData.get("title") as string);
   apiForm.append("content", formData.get("content") as string);
   apiForm.append("category_id", formData.get("category_id") as string);
+  apiForm.append("status", formData.get("status") as string);
   const image = formData.get("image");
   if (
     image &&
@@ -139,6 +140,18 @@ export default function EditPost() {
                       {cat.name}
                     </option>
                   ))}
+                </select>
+              </div>
+              <div>
+                <label className="block mb-1 font-medium">Trạng thái</label>
+                <select
+                  name="status"
+                  required
+                  className="w-full border rounded px-3 py-2"
+                  defaultValue={post.status}
+                >
+                  <option value="draft">Nháp</option>
+                  <option value="published">Công khai</option>
                 </select>
               </div>
               <div>

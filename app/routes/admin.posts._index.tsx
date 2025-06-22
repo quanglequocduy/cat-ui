@@ -69,6 +69,9 @@ export default function PostList() {
                       Danh mục
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">
+                      Trạng thái
+                    </th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">
                       Nội dung
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">
@@ -111,6 +114,9 @@ export default function PostList() {
                         </td>
                         <td className="px-4 py-3 text-gray-900">
                           {categoryMap[post.category_id] || "Không rõ"}
+                        </td>
+                        <td className="px-4 py-3 text-gray-900 capitalize">
+                          {post.status}
                         </td>
                         <td className="px-4 py-3 text-gray-600 truncate max-w-[200px] md:max-w-[400px]">
                           {post.content}

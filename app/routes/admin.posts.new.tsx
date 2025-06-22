@@ -33,6 +33,7 @@ export const action: ActionFunction = async ({ request }) => {
   apiForm.append("title", formData.get("title") as string);
   apiForm.append("content", formData.get("content") as string);
   apiForm.append("category_id", formData.get("category_id") as string);
+  apiForm.append("status", (formData.get("status") as string) || "draft");
   if (formData.get("image")) {
     apiForm.append("image", formData.get("image") as File);
   }
@@ -100,6 +101,18 @@ export default function NewPost() {
                       {cat.name}
                     </option>
                   ))}
+                </select>
+              </div>
+              <div>
+                <label className="block mb-1 font-medium">Trạng thái</label>
+                <select
+                  name="status"
+                  required
+                  className="w-full border rounded px-3 py-2"
+                  defaultValue="draft"
+                >
+                  <option value="draft">Nháp</option>
+                  <option value="published">Công khai</option>
                 </select>
               </div>
               <div>
