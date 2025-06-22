@@ -1,4 +1,5 @@
 import {
+  json,
   Links,
   LiveReload,
   Meta,
@@ -43,6 +44,14 @@ export function ErrorBoundary({ error }: { error: unknown }) {
     </html>
   );
 }
+
+export const loader = () => {
+  return json({
+    ENV: {
+      TINYMCE_API_KEY: process.env.TINYMCE_API_KEY,
+    },
+  });
+};
 
 export default function App() {
   const location = useLocation();

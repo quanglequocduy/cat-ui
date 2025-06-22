@@ -15,6 +15,7 @@ import { requireAdminAuth } from "~/lib/auth.server";
 import { tokenCookie } from "./admin.login";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef } from "react";
+import { useEnv } from "~/lib/utils";
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminAuth(request);
@@ -67,6 +68,7 @@ export default function NewPost() {
   const { categories } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   const editorRef = useRef<any>(null);
+  const { TINYMCE_API_KEY } = useEnv();
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     if (editorRef.current) {
@@ -132,7 +134,7 @@ export default function NewPost() {
               <div>
                 <label className="block mb-1 font-medium">Nội dung</label>
                 <Editor
-                  apiKey="_"
+                  apiKey={TINYMCE_API_KEY}
                   onInit={(_evt: any, editor: any) =>
                     (editorRef.current = editor)
                   }
