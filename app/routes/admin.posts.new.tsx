@@ -132,7 +132,7 @@ export default function NewPost() {
               <div>
                 <label className="block mb-1 font-medium">Nội dung</label>
                 <Editor
-                  apiKey="owbfpu3l8wufabcu6ouriwpjgwopibrn8ruqxna93dstr80h"
+                  apiKey="_"
                   onInit={(_evt: any, editor: any) =>
                     (editorRef.current = editor)
                   }
