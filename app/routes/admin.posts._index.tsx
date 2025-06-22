@@ -134,7 +134,10 @@ export default function PostList() {
                           <StatusTag status={post.status} />
                         </td>
                         <td className="px-4 py-3 text-gray-600 truncate max-w-[200px] md:max-w-[400px]">
-                          {post.content}
+                          <div
+                            className="line-clamp-3 prose"
+                            dangerouslySetInnerHTML={{ __html: post.content }}
+                          />
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex flex-col gap-2 md:flex-row md:space-x-2">

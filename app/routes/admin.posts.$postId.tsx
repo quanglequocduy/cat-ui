@@ -14,6 +14,8 @@ import type { Post } from "~/types/post";
 import type { Category } from "~/types/category";
 import { requireAdminAuth } from "~/lib/auth.server";
 import { tokenCookie } from "./admin.login";
+import { useRef } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   await requireAdminAuth(request);
@@ -88,6 +90,17 @@ export default function EditPost() {
     categories: Category[];
   }>();
   const actionData = useActionData<typeof action>();
+  const editorRef = useRef<any>(null);
+
+  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    if (editorRef.current) {
+      const content = editorRef.current.getContent();
+      const hiddenInput = document.getElementById(
+        "content-hidden"
+      ) as HTMLInputElement;
+      if (hiddenInput) hiddenInput.value = content;
+    }
+  }
 
   return (
     <div className="flex min-h-screen">
@@ -102,6 +115,7 @@ export default function EditPost() {
               method="post"
               encType="multipart/form-data"
               className="space-y-6"
+              onSubmit={handleFormSubmit}
             >
               {actionData?.error && (
                 <div className="text-red-600 font-medium mb-2">
@@ -156,12 +170,49 @@ export default function EditPost() {
               </div>
               <div>
                 <label className="block mb-1 font-medium">Nội dung</label>
-                <Textarea
-                  name="content"
-                  defaultValue={post.content}
-                  rows={8}
-                  required
+                <Editor
+                  apiKey="owbfpu3l8wufabcu6ouriwpjgwopibrn8ruqxna93dstr80h"
+                  onInit={(_evt: unknown, editor: unknown) =>
+                    (editorRef.current = editor)
+                  }
+                  initialValue={post.content}
+                  init={{
+                    height: 400,
+                    menubar: true,
+                    plugins: [
+                      "advlist",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "visualchars",
+                      "code",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                      "help",
+                      "wordcount",
+                      "emoticons",
+                      "hr",
+                      "pagebreak",
+                      "toc",
+                    ],
+                    toolbar:
+                      "undo redo | formatselect | bold italic underline strikethrough forecolor backcolor | " +
+                      "alignleft aligncenter alignright alignjustify | " +
+                      "bullist numlist outdent indent | link image media table emoticons hr pagebreak toc | " +
+                      "removeformat code fullscreen preview | help",
+                    content_style:
+                      "body { font-family:Inter,Arial,sans-serif; font-size:16px }",
+                  }}
                 />
+                <input type="hidden" id="content-hidden" name="content" />
               </div>
               <div>
                 <label className="block mb-1 font-medium">

@@ -13,6 +13,8 @@ import { Textarea } from "~/components/ui/textarea";
 import type { Category } from "~/types/category";
 import { requireAdminAuth } from "~/lib/auth.server";
 import { tokenCookie } from "./admin.login";
+import { Editor } from "@tinymce/tinymce-react";
+import { useRef } from "react";
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminAuth(request);
@@ -64,6 +66,17 @@ export const action: ActionFunction = async ({ request }) => {
 export default function NewPost() {
   const { categories } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
+  const editorRef = useRef<any>(null);
+
+  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    if (editorRef.current) {
+      const content = editorRef.current.getContent();
+      const hiddenInput = document.getElementById(
+        "content-hidden"
+      ) as HTMLInputElement;
+      if (hiddenInput) hiddenInput.value = content;
+    }
+  }
 
   return (
     <div className="flex min-h-screen">
@@ -78,6 +91,7 @@ export default function NewPost() {
               method="post"
               encType="multipart/form-data"
               className="space-y-6"
+              onSubmit={handleFormSubmit}
             >
               {actionData?.error && (
                 <div className="text-red-600 font-medium mb-2">
@@ -117,7 +131,50 @@ export default function NewPost() {
               </div>
               <div>
                 <label className="block mb-1 font-medium">Nội dung</label>
-                <Textarea name="content" rows={8} required />
+                <Editor
+                  apiKey="owbfpu3l8wufabcu6ouriwpjgwopibrn8ruqxna93dstr80h"
+                  onInit={(_evt: any, editor: any) =>
+                    (editorRef.current = editor)
+                  }
+                  initialValue=""
+                  init={{
+                    height: 400,
+                    menubar: false,
+                    plugins: [
+                      "advlist",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "visualchars",
+                      "code",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                      "help",
+                      "wordcount",
+                      "emoticons",
+                      "hr",
+                      "pagebreak",
+                      "toc",
+                    ],
+                    toolbar:
+                      "undo redo | formatselect | bold italic underline strikethrough forecolor backcolor | " +
+                      "alignleft aligncenter alignright alignjustify | " +
+                      "bullist numlist outdent indent | link image media table emoticons hr pagebreak toc | " +
+                      "removeformat code fullscreen preview | help",
+                    content_style:
+                      "body { font-family:Inter,Arial,sans-serif; font-size:16px }",
+                  }}
+                />
+                {/* Hidden input để submit content */}
+                <input type="hidden" id="content-hidden" name="content" />
               </div>
               <div>
                 <label className="block mb-1 font-medium">Hình ảnh</label>

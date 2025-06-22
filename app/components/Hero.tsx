@@ -6,7 +6,7 @@ interface HeroProps {
 
 export default function Hero({ post }: HeroProps) {
   if (!post) return null;
-  
+
   return (
     <section id="hero" className="p-6 md:p-8 mb-4">
       {/* Phần "Giới thiệu" */}
@@ -28,10 +28,14 @@ export default function Hero({ post }: HeroProps) {
 
         {/* Tiêu đề và nội dung */}
         <div className="w-full md:w-2/3">
-          <h2 className="text-xl md:text-2xl font-bold text-cat-blue">{post.title}</h2>
-          <p className="mt-2 text-sm md:text-base text-gray-700 line-clamp-3">
-            {post.content}
-          </p>
+          <h2 className="text-xl md:text-2xl font-bold text-cat-blue">
+            {post.title}
+          </h2>
+
+          <div
+            className="mt-2 text-sm md:text-base text-gray-700 line-clamp-3 prose"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
         </div>
       </div>
     </section>
