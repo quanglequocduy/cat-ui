@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { Post } from "~/types";
 
 interface TrainingSectionProps {
@@ -18,7 +19,11 @@ export default function TrainingSection({ trainings }: TrainingSectionProps) {
       {/* Phần còn lại */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {trainings.map((item) => (
-          <div key={item.id} className="border overflow-hidden shadow-md">
+          <Link
+            key={item.id}
+            to={`/posts/${item.slug}`}
+            className="border overflow-hidden shadow-md hover:shadow-lg hover:border-cat-orange transition-all duration-200 rounded-lg"
+          >
             <div className="border rounded-lg">
               <img
                 src={item.image_url}
@@ -27,13 +32,15 @@ export default function TrainingSection({ trainings }: TrainingSectionProps) {
               />
             </div>
             <div className="p-4">
-              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <h3 className="text-lg font-semibold hover:text-cat-blue transition-colors">
+                {item.title}
+              </h3>
               <div
                 className="prose text-gray-700 mt-2"
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className="text-center mt-6">

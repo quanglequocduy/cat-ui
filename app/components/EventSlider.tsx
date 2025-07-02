@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@remix-run/react";
 import { Post } from "~/types";
 
 interface EventSliderProps {
@@ -27,22 +28,25 @@ export default function EventSlider({ images }: EventSliderProps) {
   return (
     <section>
       <div className="relative max-w-full mx-auto" style={{ zIndex: 50 }}>
-        {/* Image */}
-        <img
-          key={currentIndex}
-          src={images[currentIndex].image_url}
-          alt={images[currentIndex].title}
-          className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-lg"
-          style={{ zIndex: 0 }}
-        />
+        {/* Clickable Image */}
+        <Link to={`/posts/${images[currentIndex].slug}`}>
+          <img
+            key={currentIndex}
+            src={images[currentIndex].image_url}
+            alt={images[currentIndex].title}
+            className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
+            style={{ zIndex: 0 }}
+          />
+        </Link>
 
         {/* Title Overlay */}
-        <div
-          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded text-sm sm:text-base md:text-lg"
+        <Link
+          to={`/posts/${images[currentIndex].slug}`}
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded text-sm sm:text-base md:text-lg hover:bg-opacity-70 transition-all"
           style={{ zIndex: 10 }}
         >
           {images[currentIndex].title}
-        </div>
+        </Link>
 
         {/* Previous Button */}
         <button

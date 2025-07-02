@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { Post } from "~/types";
 
 interface HeroProps {
@@ -16,7 +17,10 @@ export default function Hero({ post }: HeroProps) {
       </div>
 
       {/* Phần còn lại */}
-      <div className="flex flex-col md:flex-row gap-6 items-center">
+      <Link
+        to={`/posts/${post.slug}`}
+        className="flex flex-col md:flex-row gap-6 items-center hover:shadow-lg transition-shadow duration-200 rounded-lg p-4 -m-4"
+      >
         {/* Hình ảnh */}
         <div className="w-full md:w-1/3">
           <img
@@ -28,7 +32,7 @@ export default function Hero({ post }: HeroProps) {
 
         {/* Tiêu đề và nội dung */}
         <div className="w-full md:w-2/3">
-          <h2 className="text-xl md:text-2xl font-bold text-cat-blue">
+          <h2 className="text-xl md:text-2xl font-bold text-cat-blue hover:text-cat-orange transition-colors">
             {post.title}
           </h2>
 
@@ -37,7 +41,7 @@ export default function Hero({ post }: HeroProps) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
-      </div>
+      </Link>
     </section>
   );
 }
