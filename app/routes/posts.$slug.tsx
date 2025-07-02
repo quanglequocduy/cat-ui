@@ -6,22 +6,24 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const { slug } = params;
 
   try {
-    // Fetch post by slug
-    const response = await fetch(`https://cat-api-kmk7.onrender.com/api/posts`);
+    // Fetch post by slug using the new API endpoint
+    const response = await fetch(
+      `https://cat-api-kmk7.onrender.com/api/posts/slug/${slug}`
+    );
     if (!response.ok) {
-      throw new Error("Failed to fetch posts");
+      if (response.status === 404) {
+        throw new Response("Post not found", { status: 404 });
+      }
+      throw new Error("Failed to fetch post");
     }
 
-    const posts: Post[] = await response.json();
-    const post = posts.find((p) => p.slug === slug);
-
-    if (!post) {
-      throw new Response("Post not found", { status: 404 });
-    }
-
+    const post: Post = await response.json();
     return json({ post });
   } catch (error) {
     console.error("Error fetching post:", error);
+    if (error instanceof Response) {
+      throw error;
+    }
     throw new Response("Error loading post", { status: 500 });
   }
 }
