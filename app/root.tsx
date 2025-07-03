@@ -10,6 +10,7 @@ import {
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import tailwindStyles from "~/tailwind.css?url";
+import { Analytics } from "@vercel/analytics/remix";
 
 export function links() {
   return [
@@ -69,6 +70,7 @@ export default function App() {
         <Outlet />
         {!isAdmin && <Footer />}
         <Scripts />
+        <Analytics />
       </body>
     </html>
   );
