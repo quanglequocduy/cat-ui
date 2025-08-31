@@ -19,6 +19,7 @@ export function links() {
       href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
     },
     { rel: "stylesheet", href: tailwindStyles },
+    { rel: "icon", type: "image/jpg", href: "/CAT-Logo.jpg" },
   ];
 }
 
