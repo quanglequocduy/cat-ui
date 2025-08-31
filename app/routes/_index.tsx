@@ -29,7 +29,7 @@ export default function Index() {
         ]);
 
         setCategories(catData);
-        setPosts(postData);
+        setPosts(postData.filter((post: Post) => post.status === "published"));
       } catch (error) {
         console.error("Fetch error:", error);
       } finally {
