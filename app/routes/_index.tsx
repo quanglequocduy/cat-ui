@@ -56,7 +56,9 @@ export default function Index() {
     (post) => post.category_id === categoryMap["training"]
   );
   const eventPosts = posts.filter(
-    (post) => post.category_id === categoryMap["event"]
+    (post) =>
+      post.category_id === categoryMap["event"] ||
+      post.category_id === categoryMap["gallery"]
   );
   const heroPosts = posts.filter(
     (post) => post.category_id === categoryMap["hero"]
