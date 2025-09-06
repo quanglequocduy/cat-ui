@@ -13,22 +13,20 @@ export default function PostsSection({ posts }: PostsSectionProps) {
           <Link
             key={item.id}
             to={`/posts/${item.slug}`}
-            className="flex flex-col md:flex-row border rounded-lg overflow-hidden shadow-md w-full gap-5 p-2 hover:shadow-lg hover:border-cat-orange transition-all duration-200 cursor-pointer"
+            className="flex flex-row border rounded-lg overflow-hidden shadow-md w-full gap-4 p-2 hover:shadow-lg hover:border-cat-orange transition-all duration-200 cursor-pointer"
           >
-            {/* Hình ảnh bên trái */}
             <img
               src={item.image_url}
               alt={item.title}
-              className="w-[84px] h-[80px] object-cover rounded-md"
+              className="w-[84px] h-[80px] object-cover rounded-md flex-shrink-0"
             />
 
-            {/* Nội dung bên phải */}
-            <div className="flex-grow flex flex-col justify-between">
-              <h3 className="text-sm font-semibold hover:text-cat-blue transition-colors">
+            <div className="flex-1 flex flex-col justify-between">
+              <h3 className="text-sm font-semibold hover:text-cat-blue transition-colors line-clamp-2">
                 {item.title}
               </h3>
               <div
-                className="prose line-clamp-3 text-gray-700 mt-2"
+                className="prose line-clamp-2 text-gray-700 text-xs md:text-sm mt-1 md:mt-2"
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
             </div>

@@ -74,17 +74,13 @@ export default function Index() {
           <hr className="mt-2 border-t-2 border-cat-blue w-16" />
         </div>
         <div className="flex flex-col md:flex-row gap-6 items-stretch p-6">
-          <div
-            className="w-full md:w-1/3 pointer-events-auto"
-            style={{ zIndex: 10 }}
-          >
-            <PostsSection posts={newsPosts} />
-          </div>
-          <div
-            className="w-full md:w-2/3 pointer-events-auto"
-            style={{ zIndex: 20 }}
-          >
-            <EventSlider images={eventPosts} />
+          <div className="flex flex-col md:flex-row gap-6 p-6">
+            <div className="w-full md:w-1/3">
+              <PostsSection posts={newsPosts} />
+            </div>
+            <div className="w-full md:w-2/3">
+              <EventSlider images={eventPosts} />
+            </div>
           </div>
         </div>
       </section>
