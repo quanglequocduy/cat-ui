@@ -70,7 +70,7 @@ export default function Index() {
     <div className="mx-4 md:mx-48 pointer-events-auto" style={{ zIndex: 10 }}>
       <section className="mt-4">
         <div className="pl-6">
-          <h2 className="text-2xl font-bold text-cat-blue">Hoạt động</h2>
+          <h2 className="text-2xl font-bold text-cat-blue">Tin tức</h2>
           <hr className="mt-2 border-t-2 border-cat-blue w-16" />
         </div>
         <div className="flex flex-col md:flex-row gap-6 items-stretch p-6">

@@ -8,11 +8,9 @@ interface TrainingSectionProps {
 export default function TrainingSection({ trainings }: TrainingSectionProps) {
   return (
     <section id="training" className="p-6 md:p-8 mb-4">
-      {/* Phần "Chương trình đào tạo" */}
+      {/* Phần "Hoạt Động Từ Thiện" */}
       <div className="mb-4">
-        <h2 className="text-2xl font-bold text-cat-blue">
-          Chương trình đào tạo
-        </h2>
+        <h2 className="text-2xl font-bold text-cat-blue">Hoạt Động Từ Thiện</h2>
         <hr className="mt-2 border-t-2 border-cat-blue w-16" />
       </div>
 
@@ -43,14 +41,14 @@ export default function TrainingSection({ trainings }: TrainingSectionProps) {
           </Link>
         ))}
       </div>
-      <div className="text-center mt-6">
+      {/* <div className="text-center mt-6">
         <a
           href="#join"
           className="bg-cat-orange text-white px-6 py-2 hover:bg-orange-600"
         >
           Tham Gia Nhóm CAT
         </a>
-      </div>
+      </div> */}
     </section>
   );
 }

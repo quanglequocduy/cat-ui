@@ -10,9 +10,11 @@ export default function Hero({ post }: HeroProps) {
 
   return (
     <section id="hero" className="p-6 md:p-8 mb-4">
-      {/* Phần "Giới thiệu" */}
+      {/* Phần "Gương Thánh Carlo Acutis" */}
       <div className="mb-4">
-        <h2 className="text-2xl font-bold text-cat-blue">Giới thiệu</h2>
+        <h2 className="text-2xl font-bold text-cat-blue">
+          Gương Thánh Carlo Acutis
+        </h2>
         <hr className="mt-2 border-t-2 border-cat-blue w-16" />
       </div>
 

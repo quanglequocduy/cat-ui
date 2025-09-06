@@ -9,11 +9,7 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-bold mb-2">Theo Dõi Chúng Tôi</h3>
           <div className="mb-4">
-            <img
-              src="/CAT-Logo.jpg"
-              alt="Logo"
-              className="h-12 w-auto"
-            />
+            <img src="/CAT-Logo.jpg" alt="Logo" className="h-12 w-auto" />
           </div>
           <div className="flex space-x-4">
             <a
@@ -41,7 +37,7 @@ export default function Footer() {
           <ul className="space-y-2">
             <li>
               <ScrollLink
-                to="hero"
+                to="activities"
                 smooth={true}
                 duration={500}
                 className="hover:text-cat-orange cursor-pointer"
@@ -51,22 +47,22 @@ export default function Footer() {
             </li>
             <li>
               <ScrollLink
-                to="about"
+                to="hero"
                 smooth={true}
                 duration={500}
                 className="hover:text-cat-orange cursor-pointer"
               >
-                Giới Thiệu
+                Gương Thánh Carlo Acutis
               </ScrollLink>
             </li>
             <li>
               <ScrollLink
-                to="services"
+                to="activities"
                 smooth={true}
                 duration={500}
                 className="hover:text-cat-orange cursor-pointer"
               >
-                Dịch Vụ
+                Hoạt Động Từ Thiện
               </ScrollLink>
             </li>
             <li>

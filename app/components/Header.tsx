@@ -41,7 +41,7 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8 text-sm font-bold uppercase tracking-wide">
           <ScrollLink
-            to="hero"
+            to="activities"
             className="border border-white px-4 py-2 hover:bg-white hover:text-[#00376C] transition"
           >
             Trang Chủ
@@ -50,19 +50,19 @@ export default function Header() {
             to="hero"
             className="hover:text-cat-orange transition duration-200"
           >
-            Giới Thiệu
+            Gương Thánh Carlo Acutis
           </ScrollLink>
           <ScrollLink
             to="activities"
             className="hover:text-cat-orange transition duration-200"
           >
-            Hoạt Động
+            Tin Tức
           </ScrollLink>
           <ScrollLink
             to="training"
             className="hover:text-cat-orange transition duration-200"
           >
-            Đào Tạo
+            Hoạt Động Từ Thiện
           </ScrollLink>
         </nav>
       </div>
@@ -82,7 +82,7 @@ export default function Header() {
             onClick={() => setIsOpen(false)}
             className="hover:text-cat-orange transition duration-200"
           >
-            Giới Thiệu
+            Gương Thánh Carlo Acutis
           </ScrollLink>
           <ScrollLink
             to="activities"
@@ -96,7 +96,7 @@ export default function Header() {
             onClick={() => setIsOpen(false)}
             className="hover:text-cat-orange transition duration-200"
           >
-            Đào Tạo
+            Hoạt Động Từ Thiện
           </ScrollLink>
         </nav>
       )}

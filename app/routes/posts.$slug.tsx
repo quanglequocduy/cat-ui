@@ -62,7 +62,7 @@ export default function PostDetail() {
             <img
               src={post.image_url}
               alt={post.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
 
@@ -74,8 +74,8 @@ export default function PostDetail() {
 
             {/* Meta Info */}
             <div className="flex items-center text-gray-600 text-sm mb-6">
-              <time dateTime={post.created_at}>
-                {new Date(post.created_at).toLocaleDateString("vi-VN", {
+              <time dateTime={post.updated_at}>
+                {new Date(post.updated_at).toLocaleDateString("vi-VN", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
