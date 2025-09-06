@@ -57,22 +57,12 @@ export default function Footer() {
             </li>
             <li>
               <ScrollLink
-                to="activities"
+                to="training"
                 smooth={true}
                 duration={500}
                 className="hover:text-cat-orange cursor-pointer"
               >
                 Hoạt Động Từ Thiện
-              </ScrollLink>
-            </li>
-            <li>
-              <ScrollLink
-                to="contact"
-                smooth={true}
-                duration={500}
-                className="hover:text-cat-orange cursor-pointer"
-              >
-                Liên Hệ
               </ScrollLink>
             </li>
           </ul>
@@ -81,12 +71,11 @@ export default function Footer() {
         {/* Contact Information */}
         <div>
           <h3 className="text-lg font-bold mb-2">Liên Hệ</h3>
-          <p className="text-sm">Email: contact@carloacutisteam.com</p>
-          <p className="text-sm mt-1">Điện thoại: +84 123 456 789</p>
+          <p className="text-sm">Email: hoa@carloacutisteam.com</p>
         </div>
 
         {/* Newsletter Subscription */}
-        <div>
+        {/* <div>
           <h3 className="text-lg font-bold mb-2">Đăng Ký Nhận Tin</h3>
           <p className="text-sm mb-2">
             Nhận thông tin mới nhất từ Carlo Acutis Team.
@@ -104,7 +93,7 @@ export default function Footer() {
               Đăng Ký
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
 
       {/* Footer Bottom */}
