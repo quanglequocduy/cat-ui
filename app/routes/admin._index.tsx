@@ -15,9 +15,9 @@ export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminAuth(request);
   try {
     const [postsRes, categoriesRes, usersRes] = await Promise.all([
-      fetch("https://cat-api-kmk7.onrender.com/api/posts"),
-      fetch("https://cat-api-kmk7.onrender.com/api/categories"),
-      fetch("https://cat-api-kmk7.onrender.com/api/users").catch(() => null),
+      fetch("https://cat-api-rho.vercel.app/api/posts"),
+      fetch("https://cat-api-rho.vercel.app/api/categories"),
+      fetch("https://cat-api-rho.vercel.app/api/users").catch(() => null),
     ]);
 
     if (!postsRes.ok) {

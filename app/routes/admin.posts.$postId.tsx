@@ -23,14 +23,14 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   // Fetch post
   const postRes = await fetch(
-    `https://cat-api-kmk7.onrender.com/api/posts/${params.postId}`
+    `https://cat-api-rho.vercel.app/api/posts/${params.postId}`
   );
   if (!postRes.ok) throw new Response("Not found", { status: 404 });
   const post: Post = await postRes.json();
 
   // Fetch categories
   const catRes = await fetch(
-    "https://cat-api-kmk7.onrender.com/api/categories"
+    "https://cat-api-rho.vercel.app/api/categories"
   );
   if (!catRes.ok)
     throw new Response("Failed to fetch categories", { status: 500 });
@@ -64,7 +64,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   // Nếu không chọn file mới, không append image => backend giữ hình cũ
 
   const res = await fetch(
-    `https://cat-api-kmk7.onrender.com/api/posts/${params.postId}`,
+    `https://cat-api-rho.vercel.app/api/posts/${params.postId}`,
     {
       method: "PUT",
       headers: {

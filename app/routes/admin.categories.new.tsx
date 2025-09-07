@@ -16,7 +16,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const res = await fetch(
-      "https://cat-api-kmk7.onrender.com/api/categories",
+      "https://cat-api-rho.vercel.app/api/categories",
       {
         method: "POST",
         headers: {

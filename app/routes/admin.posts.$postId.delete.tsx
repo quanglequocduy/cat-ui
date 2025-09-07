@@ -18,7 +18,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   try {
     const res = await fetch(
-      `https://cat-api-kmk7.onrender.com/api/posts/${params.postId}`,
+      `https://cat-api-rho.vercel.app/api/posts/${params.postId}`,
       {
         method: "DELETE",
         headers: {

@@ -15,8 +15,8 @@ export default function Index() {
     async function fetchData() {
       try {
         const [catRes, postRes] = await Promise.all([
-          fetch("https://cat-api-kmk7.onrender.com/api/categories"),
-          fetch("https://cat-api-kmk7.onrender.com/api/posts"),
+          fetch("https://cat-api-rho.vercel.app/api/categories"),
+          fetch("https://cat-api-rho.vercel.app/api/posts"),
         ]);
 
         if (!catRes.ok || !postRes.ok) {

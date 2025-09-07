@@ -16,7 +16,7 @@ import { tokenCookie } from "./admin.login";
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   await requireAdminAuth(request);
   const res = await fetch(
-    `https://cat-api-kmk7.onrender.com/api/categories/${params.categoryId}`
+    `https://cat-api-rho.vercel.app/api/categories/${params.categoryId}`
   );
   if (!res.ok) throw new Response("Not found", { status: 404 });
   const category: Category = await res.json();
@@ -30,7 +30,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const name = formData.get("name");
 
   const res = await fetch(
-    `https://cat-api-kmk7.onrender.com/api/categories/${params.categoryId}`,
+    `https://cat-api-rho.vercel.app/api/categories/${params.categoryId}`,
     {
       method: "PUT",
       headers: {

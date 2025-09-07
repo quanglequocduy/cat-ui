@@ -8,7 +8,7 @@ import { requireAdminAuth } from "~/lib/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminAuth(request);
-  const res = await fetch("https://cat-api-kmk7.onrender.com/api/categories");
+  const res = await fetch("https://cat-api-rho.vercel.app/api/categories");
   if (!res.ok)
     throw new Response("Failed to fetch categories", { status: 500 });
   const categories: Category[] = await res.json();
