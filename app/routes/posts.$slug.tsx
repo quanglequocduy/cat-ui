@@ -8,7 +8,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   try {
     // Fetch post by slug using the new API endpoint
     const response = await fetch(
-      `https://cat-api-rho.vercel.app/api/posts/slug/${slug}`
+      `https://api.carloacutisteam.com/api/posts/slug/${slug}`
     );
     if (!response.ok) {
       if (response.status === 404) {

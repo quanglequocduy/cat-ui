@@ -15,17 +15,14 @@ export const action: ActionFunction = async ({ request }) => {
   const name = formData.get("name");
 
   try {
-    const res = await fetch(
-      "https://cat-api-rho.vercel.app/api/categories",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "",
-        },
-        body: JSON.stringify({ name }),
-      }
-    );
+    const res = await fetch("https://api.carloacutisteam.com/api/categories", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token ? `Bearer ${token}` : "",
+      },
+      body: JSON.stringify({ name }),
+    });
 
     if (!res.ok) {
       const error = await res.json();

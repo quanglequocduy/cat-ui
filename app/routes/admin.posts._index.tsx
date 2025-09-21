@@ -8,14 +8,14 @@ import { requireAdminAuth } from "~/lib/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   await requireAdminAuth(request);
-  const res = await fetch("https://cat-api-rho.vercel.app/api/posts");
+  const res = await fetch("https://api.carloacutisteam.com/api/posts");
   if (!res.ok) {
     throw new Response("Failed to fetch posts", { status: 500 });
   }
   const posts: Post[] = await res.json();
 
   const categoriesRes = await fetch(
-    "https://cat-api-rho.vercel.app/api/categories"
+    "https://api.carloacutisteam.com/api/categories"
   );
   if (!categoriesRes.ok) {
     throw new Response("Failed to fetch categories", { status: 500 });

@@ -19,7 +19,7 @@ export const action: ActionFunction = async ({ request }) => {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const res = await fetch("https://cat-api-rho.vercel.app/api/auth/login", {
+  const res = await fetch("https://api.carloacutisteam.com/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),

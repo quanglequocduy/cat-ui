@@ -15,8 +15,8 @@ export default function Index() {
     async function fetchData() {
       try {
         const [catRes, postRes] = await Promise.all([
-          fetch("https://cat-api-rho.vercel.app/api/categories"),
-          fetch("https://cat-api-rho.vercel.app/api/posts"),
+          fetch("https://api.carloacutisteam.com/api/categories"),
+          fetch("https://api.carloacutisteam.com/api/posts"),
         ]);
 
         if (!catRes.ok || !postRes.ok) {
